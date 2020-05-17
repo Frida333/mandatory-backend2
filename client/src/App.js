@@ -1,7 +1,8 @@
 import React from 'react';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
-import Header from './components/header/Header';
-import TrelloList from './components/trellolist/TrelloList';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import TodoApp from './components/todoapp/TodoApp';
+
 import './App.css';
 
  export default function App() {
@@ -10,10 +11,9 @@ import './App.css';
     <Helmet>
       <title>Trello</title>
     </Helmet>
-      <div className="frame">
-      <Header />
-      <TrelloList />
-      </div>
+    <Router>
+      <Route exact path="/" component={TodoApp} />
+    </Router>
     </HelmetProvider>
 
   );
