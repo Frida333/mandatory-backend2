@@ -5,22 +5,26 @@ import CardContent from '@material-ui/core/CardContent';
 import './trelloCard.css';
 
 
-export default function TrelloCard({title}) {
 
-
-
-   return (
-     <Card
-     style={{
-       minWidth: 272,
-       padding: '6px 8px 2px',
-       marginTop: 8,
-     }}>
-      <CardContent>
-         <Typography gutterBottom>
-          {title}
-         </Typography>
-      </CardContent>
-    </Card>
+export default function TrelloCard({card, description, date}) {
+  return (
+    <div>
+      <Card
+        style={{
+          minWidth: 27,
+          padding: '6px 8px 2px',
+          marginTop: 8,
+        }}>
+        {date}
+        <CardContent>
+          <Typography>
+            {card}
+          </Typography>
+          <Typography  color="textSecondary">
+            {description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
    );
 }

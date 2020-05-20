@@ -1,3 +1,7 @@
+.MuiCardContent-root {
+  padding: 0px;
+}
+
 .MuiCardContent-root:last-child {
-     padding-bottom: 24px;
+    padding-bottom: 0px;
 }
