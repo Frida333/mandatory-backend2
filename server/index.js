@@ -5,7 +5,6 @@ const http = require('http').createServer(app);
 
 const PORT = process.env.PORT || 8090;
 const {getClient, getDB, createObjectId} = require('./db');
-const {addCard} = require('./cards');
 
 app.use(express.json());
 
@@ -44,13 +43,12 @@ app.delete('/cards/:id/', (req,res) =>{
   let cardId = req.params.id;
   const db=getDB();
   db.collection('cards')
-    .deleteMany({_id: createObjectId(roomId)})
+    .deleteMany({_id: createObjectId(cardId)})
     .then(card => {
       console.log('card delete')
       res.status(200).send();
     })
     .catch(e => {
-      console.log(e)
       res.status(500).end();
     });
 })

@@ -14,8 +14,9 @@ export default function TrelloList({listTitle, cards, listId }) {
           {cards.map((card, i ) =>{
             if(listId === card.card.listId){
               return(
-                <div key={i}>
-                  <TrelloCard card={card.card.title} description={card.card.description} date={card.card.datum}/>
+                <div key={card._id}>
+
+                  <TrelloCard card={card.card.title} description={card.card.description} date={card.card.datum} id={card._id}/>
                 </div>
               )}
               return;
