@@ -21,5 +21,5 @@ module.exports = {
 
   createObjectId(id) {
     return new ObjectId(id);
-  }
+  },
 };

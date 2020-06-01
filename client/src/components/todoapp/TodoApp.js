@@ -2,38 +2,38 @@ import React, {useState, useEffect}  from 'react';
 import TrelloList from '../trellolist/TrelloList';
 import Header from '../header/Header';
 import axios from 'axios';
- import './todoApp.css';
+import './todoApp.css';
 
 export default function TodoApp(){
   const [cards, setCards] = useState([]);
-  const [savedId, setSavedId] = useState([]);
 
   useEffect(() => {
+    getCards()
+  },[]);
+
+  function getCards(){
     axios.get('/cards')
    .then((data ) => {
-     setSavedId(data.data);
      setCards(data.data);
    })
    .catch((err) =>{
      console.log(err)
    })
- },[]);
+  }
 
-  const lists = [
+  const lists =
+  [
     {
-      title: "saker att göra",
-      id: 0,
-       cards: cards,
+      title: "things to do",
+      id: "0",
     },
     {
-      title: "gör",
-      id: 1,
-      cards:cards
+      title: "make",
+      id: "1",
     },
     {
-      title:"klart",
-      id: 2,
-      cards: cards
+      title:"done",
+      id: "2",
     }
   ]
   return (
@@ -42,7 +42,7 @@ export default function TodoApp(){
         <div className="container">
           {lists.map((list, i) =>
             <div key={i}>
-              <TrelloList listTitle={list.title} listId={list.id} cards={list.cards} savedId={savedId}/>
+              <TrelloList listTitle={list.title} listId={list.id} cards={cards} getCards={getCards} lists={lists}/>
             </div>
           )}
         </div>

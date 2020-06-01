@@ -1,3 +1,5 @@
-#frame {
-  text-align: center;
+#root {
+  background-image: url("barber-shop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

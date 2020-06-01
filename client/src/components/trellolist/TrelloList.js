@@ -1,27 +1,27 @@
 import React from 'react';
 import TrelloCard from '../card/TrelloCard';
 import TrelloAddForm from '../trelloaddform/TrelloAddForm';
-
 import './trelloList.css';
 
 
-export default function TrelloList({listTitle, cards, listId }) {
+export default function TrelloList({listTitle, cards, listId , getCards, lists}) {
 
   return (
     <div className="listContainer">
       <div style={styles.container}>
         <h4>{listTitle}</h4>
-          {cards.map((card, i ) =>{
-            if(listId === card.card.listId){
-              return(
-                <div key={card._id}>
-
-                  <TrelloCard card={card.card.title} description={card.card.description} date={card.card.datum} id={card._id}/>
-                </div>
-              )}
-              return;
-          })}
-        <TrelloAddForm  listId={listId}/>
+        {cards.map((card, i ) =>{
+          if(listId === card.card.listId){
+            return(
+              <div key={card._id}>
+                <TrelloCard cardTitle={card.card.title} cardDescription={card.card.description} date={card.card.date} id={card._id} listId={listId}
+                  getCards={getCards} listTitle={listTitle} lists={lists}
+                />
+              </div>
+            )}
+            return;
+        })}
+          <TrelloAddForm  listId={listId} getCards={getCards}/>
       </div>
     </div>
   );

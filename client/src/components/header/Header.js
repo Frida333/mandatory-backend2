@@ -1,13 +1,12 @@
 import React from 'react';
 
-
+import './header.css'
 
 
 export default function Header() {
- return (
-  <div className="header">
-   <h1> Glöm inte att fylla i det som du inte ska glömma app </h1>
-  </div>
-
- );
+  return (
+    <div className="header">
+      <h1>A simple Trello </h1>
+    </div>
+  );
 }

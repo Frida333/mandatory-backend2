@@ -8,7 +8,7 @@ import moment from 'moment';
 import axios from 'axios';
 
 
-export default function TrelloAddForm({listId}) {
+export default function TrelloAddForm({listId, getCards}) {
   const [openForm, setOpenForm] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -19,7 +19,7 @@ export default function TrelloAddForm({listId}) {
        onClick={getOpenForm}
       >
        <AddIcon>Add</AddIcon>
-       <p>Add another card</p>
+        <p>Add another card</p>
       </div>
     );
   }
@@ -50,13 +50,13 @@ export default function TrelloAddForm({listId}) {
         listId: listId,
         title: title,
         description: description,
-        datum: date,
+        date: date,
       }
     })
     .then((data) => {
-      setTitle(title);
-      setDescription(description)
-      console.log(data.data);
+      setTitle("");
+      setDescription("")
+      getCards()
     })
     .catch(err => {
       console.log(err);
@@ -64,55 +64,53 @@ export default function TrelloAddForm({listId}) {
   }
 
 
-
-
-
-function renderForm(){
-  return (
-    <div>
-      <form onSubmit={(e) => onSubmit(e)}>
-        <Card
-           style={{
-             minHeight: 70,
-             minWidth: 200,
-             padding: '6px 8px 2px',
-             marginTop: 8,
-           }}>
-           <TextareaAutosize
-              placeholder= "Enter a title for this card..."
-              value={title}
-              onChange={handleInput}
-              style ={{
-                resize: 'none',
-                width: '100%',
-                outline: 'none',
-                border: 'none',
-                overflow: 'hidden',
-              }}
-            />
-            <TextareaAutosize
-              placeholder= "Add description..."
-              value={description}
-              onChange={handleInputDescription}
-              style ={{
-                resize: 'none',
-                width: '100%',
-                outline: 'none',
-                border: 'none',
-                overflow: 'hidden',
-              }}
-            />
-        </Card>
-          <div style={styles.formButton}>
-            <Button
-              type= 'submit'
-              variant='contained'
-              style= {{color: 'white', backgroundColor: '#2f4f4f'}}
-            >
-            Add a card
-            </Button>
-            <CloseIcon style={{marginLeft: 8, cursor: 'pointer'}} onClick={getCloseForm}>Close</CloseIcon>
-          </div>
+  function renderForm(){
+    return (
+      <div>
+        <form onSubmit={(e) => onSubmit(e)}>
+          <Card
+             style={{
+               minHeight: 70,
+               minWidth: 200,
+               padding: '6px 8px 2px',
+               marginTop: 8,
+             }}>
+             <TextareaAutosize
+                placeholder= "Enter a title for this card..."
+                value={title}
+                onChange={handleInput}
+                required
+                style ={{
+                  resize: 'none',
+                  width: '100%',
+                  outline: 'none',
+                  border: 'none',
+                  overflow: 'hidden',
+                }}
+              />
+              <TextareaAutosize
+                placeholder= "Add description..."
+                value={description}
+                onChange={handleInputDescription}
+                style ={{
+                  resize: 'none',
+                  width: '100%',
+                  outline: 'none',
+                  border: 'none',
+                  overflow: 'hidden',
+                }}
+              />
+              </Card>
+                <div style={styles.formButton}>
+                  <Button
+                    type= 'submit'
+                    variant='contained'
+                    style= {{color: 'white', backgroundColor: '#2f4f4f'}}
+                  >
+                    Add a card
+                  </Button>
+                    <CloseIcon style={{marginLeft: 8, cursor: 'pointer'}} onClick={getCloseForm}>Close</CloseIcon>
+                </div>
         </form>
       </div>
     )
